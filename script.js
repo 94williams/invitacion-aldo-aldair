@@ -5,8 +5,8 @@ const CONFIG = {
   // Zona horaria del evento (CDMX, sin horario de verano desde 2022).
   // Así la cuenta regresiva y el calendario son correctos aunque el invitado esté en otro país.
   zona: "-06:00",
-  fechaTexto: "Sábado · 25 de octubre · 2026",
-  fechaDetalle: "Sábado 2 de octubre de 2026",
+  fechaTexto: "Domingo · 25 de octubre · 2026",
+  fechaDetalle: "Domingo 25 de octubre de 2026",
   horaTexto: "12:00 p. m.",
 
   itinerario: {
@@ -104,16 +104,16 @@ function openBurst(){
     setTimeout(() => piece.remove(), 1900);
   }
 
-  // Flash de luz (como cuando Buzz dice "¡A la infinito y más allá!")
+  // Flash de luz (como cuando Buzz dice "¡Al infinito y más allá!")
   const flash = document.createElement("div");
   flash.style.cssText = "position:fixed;inset:0;background:radial-gradient(circle at 50% 30%,rgba(255,215,0,.95),rgba(255,215,0,.3) 35%,transparent);z-index:3500;pointer-events:none;animation:flashBoom .6s ease-out forwards;";
   burst.appendChild(flash);
   setTimeout(() => flash.remove(), 700);
 
-  // Texto "¡A la infinito y más allá!" que aparece brevemente
+  // Texto "¡Al infinito y más allá!" que aparece brevemente
   const phrase = document.createElement("div");
   phrase.style.cssText = "position:fixed;left:50%;top:45%;transform:translate(-50%,-50%);z-index:3501;pointer-events:none;font-family:Luckiest Guy,cursive;font-size:clamp(1.5rem,8vw,3.2rem);color:#fff;text-shadow:0 3px 0 #0e3f85,0 6px 0 #054aa8,0 12px 20px rgba(0,0,0,.4);text-align:center;letter-spacing:1px;animation:infinityPhrase .9s ease-out forwards;";
-  phrase.textContent = "¡A la infinito y más allá!";
+  phrase.textContent = "¡Al infinito y más allá!";
   burst.appendChild(phrase);
   setTimeout(() => phrase.remove(), 1100);
 }
@@ -142,7 +142,7 @@ function openInvitation(){
     audio.play().then(() => $("musicBtn").classList.add("playing")).catch(() => {});
   }
 
-  // Tiempo para que se vea la tapa (1s) y las nubes (1.1s) antes de revelar el hero
+  // Deja terminar la apertura de la caja y el difuminado espacial antes de revelar el hero.
   const delay = reduceMotion ? 120 : 1250;
 
   setTimeout(() => {

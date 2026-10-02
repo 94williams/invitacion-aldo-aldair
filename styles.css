@@ -380,22 +380,28 @@ button{cursor:pointer}
 @keyframes invite{0%,100%{transform:translateY(0)}50%{transform:translateY(-5px) scale(1.02)}}
 .welcome-note{margin:12px 0 0;font-size:.82rem;color:#4f6e8c}
 
-/* Nubes que se abren como cortina */
-.open-cloud{
-  position:absolute;z-index:8;width:60vw;height:130vh;top:-15vh;opacity:0;pointer-events:none;
+/* Difuminado de transición: convierte el letrero en un salto al espacio */
+.space-warp{
+  position:absolute;z-index:7;inset:-8%;pointer-events:none;opacity:0;
   background:
-    radial-gradient(circle at 24% 28%,#fff 0 18%,transparent 19%),
-    radial-gradient(circle at 55% 18%,#fff 0 21%,transparent 22%),
-    radial-gradient(circle at 62% 55%,#fff 0 24%,transparent 25%),
-    radial-gradient(circle at 18% 62%,#fff 0 20%,transparent 21%);
-  filter:drop-shadow(0 0 30px rgba(90,170,220,.35));
+    radial-gradient(ellipse at 50% 48%,rgba(8,24,76,.18),rgba(25,70,160,.42) 48%,rgba(8,18,55,.72)),
+    radial-gradient(circle at 22% 26%,rgba(255,255,255,.95) 0 1px,transparent 2px),
+    radial-gradient(circle at 76% 35%,rgba(255,239,168,.95) 0 1.5px,transparent 2.5px),
+    radial-gradient(circle at 63% 78%,rgba(255,255,255,.9) 0 1px,transparent 2px),
+    radial-gradient(circle at 35% 68%,rgba(143,208,255,.95) 0 1px,transparent 2px);
+  background-size:100% 100%,83px 79px,127px 113px,101px 137px,149px 97px;
+  -webkit-backdrop-filter:blur(0) saturate(1);
+  backdrop-filter:blur(0) saturate(1);
 }
-.cloud-left{left:-58vw}
-.cloud-right{right:-58vw;transform:scaleX(-1)}
-.welcome.opening .open-cloud{opacity:1;animation:cloudSweep 1.1s var(--smooth) forwards}
-.welcome.opening .cloud-right{animation-name:cloudSweepRight}
-@keyframes cloudSweep{0%{transform:translateX(0) scale(1)}100%{transform:translateX(150vw) scale(1.25)}}
-@keyframes cloudSweepRight{0%{transform:scaleX(-1) translateX(0) scale(1)}100%{transform:scaleX(-1) translateX(150vw) scale(1.25)}}
+.welcome.opening .space-warp{
+  animation:spaceWarp 1.15s cubic-bezier(.2,.7,.25,1) both;
+}
+@keyframes spaceWarp{
+  0%{opacity:0;transform:scale(.96);-webkit-backdrop-filter:blur(0) saturate(1);backdrop-filter:blur(0) saturate(1)}
+  34%{opacity:.94;transform:scale(1);-webkit-backdrop-filter:blur(9px) saturate(1.45);backdrop-filter:blur(9px) saturate(1.45)}
+  66%{opacity:1;transform:scale(1.04);-webkit-backdrop-filter:blur(15px) saturate(1.7);backdrop-filter:blur(15px) saturate(1.7)}
+  100%{opacity:0;transform:scale(1.12);-webkit-backdrop-filter:blur(2px) saturate(1.2);backdrop-filter:blur(2px) saturate(1.2)}
+}
 
 .burst{position:absolute;inset:0;pointer-events:none;z-index:10;overflow:hidden}
 .piece{
@@ -429,7 +435,7 @@ button{cursor:pointer}
   text-shadow:0 1px 0 #fff,0 3px 0 #b6d6ee,0 8px 12px rgba(14,63,133,.2);
 }
 .section-space .section-header h2{color:#fff;text-shadow:0 3px 0 #1b4f99,0 10px 18px rgba(0,0,0,.4)}
-.section-space .section-header .kicker{color:#ffdf74}
+.section-space .section-header .kicker{color:#fff}
 .lead{max-width:680px;margin:0 auto;line-height:1.82;font-size:clamp(1rem,3.2vw,1.2rem)}
 
 .content-card{
@@ -593,6 +599,13 @@ button{cursor:pointer}
 /* Temas de sección */
 .section-paper{background:linear-gradient(#fff8e5,#fffef9)}
 .section-sky{background:linear-gradient(#d6f4ff,#f8fdff)}
+.countdown-woody{
+  position:absolute;z-index:0;left:50%;top:84px;bottom:auto;transform:translateX(-50%);
+  width:auto;height:calc(100% - 84px);max-width:none;
+  object-fit:contain;object-position:center bottom;opacity:.42;
+  filter:drop-shadow(0 12px 12px rgba(25,49,65,.22));pointer-events:none;
+}
+#countdownSection>:not(.countdown-woody){position:relative;z-index:1}
 .section-western{background:linear-gradient(#f8e3bf,#f3d8ad)}
 .section-map{background:linear-gradient(#eaf7ff,#fdf9ec)}
 .section-space{
@@ -667,6 +680,12 @@ button{cursor:pointer}
 .plan-ham{width:min(150px,72%);height:112px}
 .plan-potato{width:min(132px,78%);height:100px}
 .detail-icon{width:90px;height:90px}
+.event-toys{width:min(100%,220px);height:190px;object-fit:contain}
+.gift-aliens{width:min(100%,250px);height:132px;object-fit:contain}
+.dress-jessie{
+  width:100%;height:190px;object-fit:contain;margin:0 auto 12px;
+  filter:drop-shadow(0 12px 10px rgba(0,0,0,.2));
+}
 .plan-card:hover .icon-real,.detail-card:hover .detail-icon{transform:translateZ(80px) scale(1.12) rotate(-6deg)}
 .plan-card h3,.detail-card h3{
   margin:10px 0 4px;font-family:"Luckiest Guy";font-weight:400;color:var(--blue-deep);letter-spacing:.4px;font-size:1.3rem;
@@ -785,6 +804,7 @@ button{cursor:pointer}
 }
 @media(max-width:760px){
   .section{padding:72px 15px}
+  .countdown-woody{top:72px;height:calc(100% - 72px);opacity:.34}
   .countdown{grid-template-columns:repeat(2,1fr)}
   .hero-showcase{width:100%}
   .hero-photo-frame{width:min(480px,86vw);height:min(52svh,560px)}
@@ -1022,6 +1042,40 @@ body.locked .rsvp-sticky{display:none}
   transform-style:preserve-3d;
 }
 
+/* Colores del letrero del nombre en los títulos principales */
+.welcome .top-line .hero-word,.hero .hero-top .hero-word,
+.welcome .big-two,.hero .hero-year{
+  color:var(--yellow);-webkit-text-stroke:3px var(--blue);paint-order:stroke fill;
+  text-shadow:0 1px 0 var(--red),0 2px 0 var(--red),0 3px 0 var(--red-deep),
+    0 4px 0 var(--red-deep),0 7px 9px rgba(17,71,145,.25);
+}
+#story .section-title,#countdownSection .section-header h2,#plan .section-header h2,
+#venueSection .location-copy h2,#gallery .section-header h2,#details .section-header h2,
+#rsvp .section-header h2{
+  color:var(--yellow);-webkit-text-stroke:2px var(--blue);paint-order:stroke fill;
+  text-shadow:0 1px 0 var(--red),0 2px 0 var(--red),0 3px 0 var(--red-deep),
+    0 4px 0 var(--red-deep),0 7px 10px rgba(17,71,145,.24);
+}
+#countdownSection .section-header .kicker,#plan .section-header .kicker,
+#gallery .section-header .kicker,#details .section-header .kicker,
+#rsvp .section-header .kicker{
+  color:var(--yellow);-webkit-text-stroke:1px var(--blue);paint-order:stroke fill;
+  text-shadow:0 1px 0 var(--red),0 2px 0 var(--red-deep),0 4px 6px rgba(17,71,145,.2);
+}
+#countdownSection .section-header .kicker,#plan .section-header .kicker,
+#venueSection .location-copy .kicker{
+  font-family:"Bungee";font-size:calc(.94rem + 2px);letter-spacing:.06em;
+}
+#countdownSection .count-box strong{
+  color:var(--yellow);-webkit-text-stroke:3px var(--blue);paint-order:stroke fill;
+  text-shadow:0 1px 0 var(--red),0 2px 0 var(--red),0 3px 0 var(--red-deep),
+    0 4px 0 var(--red-deep),0 8px 8px rgba(0,0,0,.18);
+}
+#plan .plan-card h3,#details .detail-card h3{
+  color:var(--yellow);-webkit-text-stroke:1px var(--blue);paint-order:stroke fill;
+  text-shadow:0 1px 0 var(--red),0 2px 0 var(--red-deep),0 5px 7px rgba(17,71,145,.2);
+}
+
 /* Foto principal dentro de una nave espacial */
 .spacecraft-frame{
   --ship-side:clamp(92px,22vw,116px);
@@ -1209,6 +1263,7 @@ body.locked .rsvp-sticky{display:none}
 @media(prefers-reduced-motion:reduce){
   .spacecraft-frame{animation:none}
   .spacecraft-engine::after{animation:none}
+  .welcome.opening .space-warp{animation:none}
 }
 
 .wood-floor{
