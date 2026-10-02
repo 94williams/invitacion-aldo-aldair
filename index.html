@@ -9,7 +9,7 @@
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Bungee:wght@400&family=Luckiest+Guy&family=Nunito:wght@400;600;700;800&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="styles.css?v=welcome-name-centered-44">
+  <link rel="stylesheet" href="styles.css?v=welcome-toys-click-music-53">
 </head>
 <body class="locked">
   <div id="progressBar" class="progress-bar"></div>
@@ -26,22 +26,19 @@
         </div>
         <div class="toybox-base">
           <div class="toybox-depth" aria-hidden="true"></div>
-          <div class="toybox-items">
-            <img src="assets/rocket.svg?v=3d-2" alt="" class="box-item rocket">
-            <img src="assets/sheriff.svg?v=3d-2" alt="" class="box-item badge">
-            <div class="box-item blocks toy-blocks" role="img" aria-label="ALDO en cuatro bloques de juguete">
-              <span class="toy-block toy-block-1" aria-hidden="true"><span class="block-face block-front">A</span><span class="block-face block-top"></span><span class="block-face block-side"></span></span>
-              <span class="toy-block toy-block-2" aria-hidden="true"><span class="block-face block-front">L</span><span class="block-face block-top"></span><span class="block-face block-side"></span></span>
-              <span class="toy-block toy-block-3" aria-hidden="true"><span class="block-face block-front">D</span><span class="block-face block-top"></span><span class="block-face block-side"></span></span>
-              <span class="toy-block toy-block-4" aria-hidden="true"><span class="block-face block-front">O</span><span class="block-face block-top"></span><span class="block-face block-side"></span></span>
-            </div>
-          </div>
           <div class="toybox-front" aria-hidden="true">
             <span class="chest-strap strap-left"></span>
             <span class="chest-strap strap-right"></span>
-            <span class="toybox-plaque">JUGUETES</span>
+            <span class="toybox-plaque">TOYS</span>
             <span class="toybox-lock"></span>
           </div>
+        </div>
+        <div class="toybox-items" aria-label="Juguetes saliendo del baúl">
+          <img src="assets/Jessy.png" alt="" class="box-character jessie" aria-hidden="true">
+          <img src="assets/Marcianos.png" alt="" class="box-character aliens" aria-hidden="true">
+          <img src="assets/REX.png" alt="" class="box-character rex" aria-hidden="true">
+          <img src="assets/Woody.png" alt="" class="box-character woody" aria-hidden="true">
+          <img src="assets/buzz-removebg-preview.png" alt="" class="box-character buzz" aria-hidden="true">
         </div>
       </div>
 
@@ -73,7 +70,7 @@
 
   <div class="floating-actions">
     <button id="shareBtn" class="fab" type="button" aria-label="Compartir">↗</button>
-    <button id="musicBtn" class="fab" type="button" aria-label="Música">♫</button>
+    <button id="musicBtn" class="fab" type="button" aria-label="Reproducir música">♫</button>
   </div>
 
   <main>
@@ -292,7 +289,10 @@
             </select>
           </label>
 
-          <button type="submit" class="btn btn-whatsapp">Confirmar por WhatsApp</button>
+          <div class="rsvp-actions">
+            <button type="submit" class="btn btn-whatsapp" data-contact="edmundo">Confirmar con Edmundo Bustos</button>
+            <button type="submit" class="btn btn-whatsapp" data-contact="ana-karen">Confirmar con Ana Karen Muñoz</button>
+          </div>
         </form>
       </div>
     </section>
@@ -304,10 +304,8 @@
     <small>Te esperamos en esta aventura con alegría </small>
   </footer>
 
-  <!-- Música opcional:
-  <audio id="bgMusic" src="assets/musica.mp3" loop preload="auto"></audio>
-  -->
+  <audio id="bgMusic" src="assets/yo-soy-tu-amigo-fiel.mp3" loop preload="none"></audio>
 
-  <script src="script.js?v=no-welcome-rocket-5"></script>
+  <script src="script.js?v=welcome-toys-click-music-50"></script>
 </body>
 </html>

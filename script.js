@@ -23,8 +23,11 @@ const CONFIG = {
 
   dressCode: "Ven cómodo y listo para la aventura. Estilo casual o inspirado en juguetes.",
 
-  // México: 52 + número de 10 dígitos
-  whatsapp: "525500000000"
+  rsvpEndpoint: "https://script.google.com/macros/s/AKfycby2PxLlpUmjLW0lpsnsXYlMq-VefkgrbHGVqH6aRWV4CJQua2616a4tE1B4FQY6UpWm/exec",
+  whatsappContacts: [
+    { id: "edmundo", name: "Edmundo Bustos", phone: "525522995162" },
+    { id: "ana-karen", name: "Ana Karen Muñoz", phone: "525537365974" }
+  ]
 };
 
 const $ = (id) => document.getElementById(id);
@@ -135,15 +138,15 @@ function openInvitation(){
 
   openBurst();
   welcome.classList.add("opening");
+  welcome.querySelectorAll(".box-character").forEach((character) => {
+    character.classList.add("is-emerging");
+  });
   if(navigator.vibrate) navigator.vibrate([30,50,30]);
 
-  const audio = $("bgMusic");
-  if(audio){
-    audio.play().then(() => $("musicBtn").classList.add("playing")).catch(() => {});
-  }
+  playBackgroundMusic();
 
-  // Deja terminar la apertura de la caja y el difuminado espacial antes de revelar el hero.
-  const delay = reduceMotion ? 120 : 1250;
+  // Da tiempo para ver el nombre antes del difuminado y deja terminar la apertura.
+  const delay = reduceMotion ? 1100 : 1500;
 
   setTimeout(() => {
     // Al quitar "locked" arranca toda la coreografía del hero (ver CSS)
@@ -301,10 +304,56 @@ function scrollTilt(){
   setTilt(0, Math.min(window.scrollY / window.innerHeight, 1) * 8);
 }
 
-function rsvpSubmit(e){
+function saveRsvp(name, count){
+  return new Promise((resolve, reject) => {
+    const requestId = `rsvp-${Date.now()}-${Math.random().toString(36).slice(2)}`;
+    const frame = document.createElement("iframe");
+    const form = document.createElement("form");
+    frame.name = requestId;
+    frame.hidden = true;
+    form.hidden = true;
+    form.method = "post";
+    form.action = CONFIG.rsvpEndpoint;
+    form.target = requestId;
+
+    const fields = { requestId, name, count: String(count) };
+    for(const [key, value] of Object.entries(fields)){
+      const input = document.createElement("input");
+      input.type = "hidden";
+      input.name = key;
+      input.value = value;
+      form.appendChild(input);
+    }
+
+    const cleanup = () => {
+      window.removeEventListener("message", onMessage);
+      clearTimeout(timeout);
+      frame.remove();
+      form.remove();
+    };
+    const onMessage = (event) => {
+      if(event.source !== frame.contentWindow || event.data?.type !== "rsvp-result" || event.data.requestId !== requestId) return;
+      cleanup();
+      if(event.data.ok) resolve();
+      else reject(new Error("No se pudo guardar la confirmación. Inténtalo de nuevo."));
+    };
+    const timeout = setTimeout(() => {
+      cleanup();
+      reject(new Error("No recibimos respuesta de Google Sheets. Revisa la conexión e inténtalo de nuevo."));
+    }, 20000);
+
+    window.addEventListener("message", onMessage);
+    document.body.append(frame, form);
+    form.submit();
+  });
+}
+
+async function rsvpSubmit(e){
   e.preventDefault();
   const name = $("guestName").value.trim();
-  const count = $("guestCount").value;
+  const count = Number($("guestCount").value);
+  const contactId = e.submitter?.dataset.contact;
+  const contact = CONFIG.whatsappContacts.find((item) => item.id === contactId);
 
   if(!name){
     $("guestName").focus();
@@ -312,8 +361,13 @@ function rsvpSubmit(e){
     return;
   }
 
-  if(CONFIG.whatsapp === "525500000000"){
-    showToast("Cambia el número de WhatsApp en script.js antes de publicarla.");
+  if(!contact){
+    showToast("Elige el número de WhatsApp al que quieres confirmar.");
+    return;
+  }
+
+  if(!CONFIG.rsvpEndpoint){
+    showToast("Falta conectar el formulario con Google Sheets.");
     return;
   }
 
@@ -321,9 +375,26 @@ function rsvpSubmit(e){
     `¡Hola! Soy ${name}. Confirmo nuestra asistencia a los 2 años de ` +
     `${CONFIG.nombre}. Asistiremos ${count} ${count === "1" ? "persona" : "personas"}. ` +
     `🎉`;
+  const url = `https://wa.me/${contact.phone}?text=${encodeURIComponent(msg)}`;
+  const whatsappWindow = window.open("about:blank", "_blank");
+  if(!whatsappWindow){
+    showToast("Permite las ventanas emergentes para abrir WhatsApp.");
+    return;
+  }
+  whatsappWindow.opener = null;
 
-  const url = `https://wa.me/${CONFIG.whatsapp}?text=${encodeURIComponent(msg)}`;
-  window.open(url, "_blank", "noopener");
+  const buttons = [...$("rsvpForm").querySelectorAll("button[type='submit']")];
+  buttons.forEach((button) => { button.disabled = true; });
+  try{
+    await saveRsvp(name, count);
+    whatsappWindow.location.replace(url);
+    showToast(`Confirmación guardada. Continúa por WhatsApp con ${contact.name}.`);
+  }catch(error){
+    whatsappWindow.close();
+    showToast(error.message);
+  }finally{
+    buttons.forEach((button) => { button.disabled = false; });
+  }
 }
 
 async function shareInvitation(){
@@ -345,22 +416,38 @@ async function shareInvitation(){
   }catch(_){}
 }
 
+function playBackgroundMusic(){
+  const audio = $("bgMusic");
+  const btn = $("musicBtn");
+
+  if(!audio){
+    showToast("No se encontró el archivo de música.");
+    return;
+  }
+
+  audio.play().then(() => {
+    btn.classList.add("playing");
+    btn.setAttribute("aria-label", "Pausar música");
+  }).catch(() => {
+    showToast("No se pudo iniciar la música. Toca ♫ para volver a intentarlo.");
+  });
+}
+
 function toggleMusic(){
   const audio = $("bgMusic");
   const btn = $("musicBtn");
 
   if(!audio){
-    showToast("Si quieres música, agrega assets/musica.mp3 y habilita el <audio> en index.html.");
+    showToast("No se encontró el archivo de música.");
     return;
   }
 
   if(audio.paused){
-    audio.play().then(() => btn.classList.add("playing")).catch(() => {
-      showToast("Toca nuevamente para reproducir la música.");
-    });
+    playBackgroundMusic();
   }else{
     audio.pause();
     btn.classList.remove("playing");
+    btn.setAttribute("aria-label", "Reproducir música");
   }
 }
 

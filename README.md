@@ -32,24 +32,42 @@ const CONFIG = {
     direccion: "Dirección completa",
     maps: "URL de Google Maps"
   },
-  whatsapp: "525512345678"
+  rsvpEndpoint: "",
+  whatsappContacts: [
+    { id: "edmundo", name: "Edmundo Bustos", phone: "525522995162" },
+    { id: "ana-karen", name: "Ana Karen Muñoz", phone: "525537365974" }
+  ]
 };
 ```
 
-## Música opcional
+After deploying the Apps Script below, paste its `/exec` URL into `rsvpEndpoint`.
 
-1. Guarda una canción como `assets/musica.mp3`
-2. En `index.html`, descomenta la línea:
+## Música
+
+La invitación reproduce `assets/yo-soy-tu-amigo-fiel.mp3` al pulsar «Abrir invitación». El botón flotante permite pausarlo o reanudarlo. Si el navegador bloquea el inicio, el invitado puede volver a intentarlo con el botón de música.
 
 ```html
-<audio id="bgMusic" src="assets/musica.mp3" loop preload="auto"></audio>
+<audio id="bgMusic" src="assets/yo-soy-tu-amigo-fiel.mp3" loop preload="none"></audio>
 ```
+
+## Confirmaciones compartidas en Google Sheets
+
+El formulario ofrece dos botones de WhatsApp. Antes de abrir el chat, guarda una fila por familia en Google Sheets; si el mismo nombre confirma otra vez, actualiza esa fila. La pestaña `Resumen` calcula las familias y personas confirmadas.
+
+1. Crea una hoja de cálculo privada en Google Sheets.
+2. Desde la hoja, abre **Extensiones > Apps Script** y copia el contenido de `GoogleAppsScript.gs` en el editor.
+3. En Apps Script, selecciona **Implementar > Nueva implementación > Aplicación web**. Elige ejecutar como tú y permite el acceso a cualquiera para que los invitados puedan confirmar. Implementa y copia la URL de la aplicación web que termina en `/exec`.
+4. En `script.js`, pega esa URL en `CONFIG.rsvpEndpoint`. Sin una URL válida, el formulario avisa y no registra ni abre WhatsApp.
+5. Mantén la hoja privada: los invitados envían confirmaciones, pero no necesitan acceso a la hoja.
+
+La aplicación usa los números configurados en `CONFIG.whatsappContacts` (México, prefijo `52`). Cambia ahí los contactos si fuera necesario. La URL de Apps Script es pública para recibir envíos; no compartas la URL de la hoja.
 
 ## Archivos
 
 - `index.html`
 - `styles.css`
 - `script.js`
+- `GoogleAppsScript.gs` (backend para guardar y resumir confirmaciones)
 - `assets/` con fotos y SVGs
 
 ## Recomendación
