@@ -1,0 +1,313 @@
+<!doctype html>
+<html lang="es">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <meta name="theme-color" content="#66c7f0">
+  <meta name="description" content="Invitación de Toy Story para los 2 años de Aldo Aldair">
+  <title>Mis 2 años · Aldo Aldair</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Bungee:wght@400&family=Luckiest+Guy&family=Nunito:wght@400;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="styles.css?v=plan-potato-29">
+</head>
+<body class="locked">
+  <div id="progressBar" class="progress-bar"></div>
+  <div id="starTrail" class="star-trail" aria-hidden="true"></div>
+  <div id="toast" class="toast" role="status" aria-live="polite"></div>
+
+  <section id="welcome" class="welcome" aria-labelledby="welcomeTitle">
+    <div class="andy-clouds"></div>
+
+    <div class="welcome-card">
+      <div class="toybox-wrap">
+        <div class="toybox-lid" aria-hidden="true">
+          <span class="toybox-lid-panel"></span>
+        </div>
+        <div class="toybox-base">
+          <div class="toybox-depth" aria-hidden="true"></div>
+          <div class="toybox-items">
+            <img src="assets/rocket.svg?v=3d-2" alt="" class="box-item rocket">
+            <img src="assets/sheriff.svg?v=3d-2" alt="" class="box-item badge">
+            <div class="box-item blocks toy-blocks" role="img" aria-label="ALDO en cuatro bloques de juguete">
+              <span class="toy-block toy-block-1" aria-hidden="true"><span class="block-face block-front">A</span><span class="block-face block-top"></span><span class="block-face block-side"></span></span>
+              <span class="toy-block toy-block-2" aria-hidden="true"><span class="block-face block-front">L</span><span class="block-face block-top"></span><span class="block-face block-side"></span></span>
+              <span class="toy-block toy-block-3" aria-hidden="true"><span class="block-face block-front">D</span><span class="block-face block-top"></span><span class="block-face block-side"></span></span>
+              <span class="toy-block toy-block-4" aria-hidden="true"><span class="block-face block-front">O</span><span class="block-face block-top"></span><span class="block-face block-side"></span></span>
+            </div>
+          </div>
+          <div class="toybox-front" aria-hidden="true">
+            <span class="chest-strap strap-left"></span>
+            <span class="chest-strap strap-right"></span>
+            <span class="toybox-plaque">JUGUETES</span>
+            <span class="toybox-lock"></span>
+          </div>
+        </div>
+      </div>
+
+      <div class="welcome-sign">
+        <p class="small-kicker">UNA AVENTURA ESTÁ POR COMENZAR</p>
+        <div class="top-line">
+          <span class="hero-word">MIS</span>
+          <span class="big-two">2</span>
+          <span class="hero-word">AÑOS</span>
+        </div>
+          <div class="welcome-name-plaque">
+            <h1 id="welcomeTitle" class="name-logo">
+              <span>Aldo</span>
+              <span>Aldair</span>
+            </h1>
+            <p class="sub-invite">¡Te invito a celebrar conmigo!</p>
+          </div>
+      </div>
+
+      <button id="openBtn" class="btn btn-primary btn-open" type="button">
+        Abrir invitación
+      </button>
+      <p class="welcome-note">Toca para abrir la caja de juguetes</p>
+    </div>
+
+    <div class="open-cloud cloud-left"></div>
+    <div class="open-cloud cloud-right"></div>
+    <div id="burst" class="burst" aria-hidden="true"></div>
+  </section>
+
+  <div class="floating-actions">
+    <button id="shareBtn" class="fab" type="button" aria-label="Compartir">↗</button>
+    <button id="musicBtn" class="fab" type="button" aria-label="Música">♫</button>
+  </div>
+
+  <main>
+    <header class="hero">
+      <div class="cloud-layer layer-1"></div>
+      <div class="cloud-layer layer-2"></div>
+
+      <div class="hero-inner">
+        <div class="hero-sign reveal">
+          <div class="hero-copy">
+            <div class="hero-top">
+              <span class="hero-word">MIS</span>
+              <span class="hero-year">2</span>
+              <span class="hero-word">AÑOS</span>
+            </div>
+            <h1 class="name-logo hero-logo">
+              <span id="heroName1">Aldo</span>
+              <span id="heroName2">Aldair</span>
+            </h1>
+            <p class="hero-sub">¡Te invito a celebrar conmigo!</p>
+          </div>
+          <img class="hero-buzz" src="assets/buzz-removebg-preview.png" alt="Buzz Lightyear" width="419" height="530" loading="lazy" decoding="async">
+        </div>
+
+        <div class="hero-showcase reveal">
+          <img class="space-alien alien-above-left" src="assets/marciano-head-removebg.png" alt="" aria-hidden="true" decoding="async" width="534" height="408">
+          <img class="space-alien alien-above-right" src="assets/marciano-head-removebg.png" alt="" aria-hidden="true" decoding="async" width="534" height="408">
+          <img class="space-alien alien-left" src="assets/marciano-head-removebg.png" alt="" aria-hidden="true" decoding="async" width="534" height="408">
+          <img class="space-alien alien-left-lower" src="assets/marciano-head-removebg.png" alt="" aria-hidden="true" decoding="async" width="534" height="408">
+          <img class="space-alien alien-right" src="assets/marciano-head-removebg.png" alt="" aria-hidden="true" decoding="async" width="534" height="408">
+          <img class="space-alien alien-right-lower" src="assets/marciano-head-removebg.png" alt="" aria-hidden="true" decoding="async" width="534" height="408">
+          <div class="spacecraft-frame">
+            <span class="spacecraft-hull-depth" aria-hidden="true"></span>
+            <span class="spacecraft-nose" aria-hidden="true"></span>
+            <span class="spacecraft-wing wing-left" aria-hidden="true"></span>
+            <span class="spacecraft-wing wing-right" aria-hidden="true"></span>
+            <span class="spacecraft-engine engine-left" aria-hidden="true"></span>
+            <span class="spacecraft-engine engine-right" aria-hidden="true"></span>
+            <span class="spacecraft-vent vent-left" aria-hidden="true"></span>
+            <span class="spacecraft-vent vent-right" aria-hidden="true"></span>
+            <span class="spacecraft-controls" aria-hidden="true"><i></i><i></i><i></i></span>
+            <span class="spacecraft-badge" aria-hidden="true">A-02</span>
+            <div class="hero-photo-frame">
+              <img src="assets/space-aldo.png?v=1" alt="Aldo Aldair dentro de una nave espacial">
+            </div>
+          </div>
+
+        </div>
+
+        <a href="#story" class="btn btn-primary reveal">Comenzar aventura</a>
+      </div>
+      <div class="wood-floor"></div>
+    </header>
+
+    <section id="story" class="section section-paper">
+      <div class="content-card reveal">
+        <img class="section-badge" src="assets/pelota.png" alt="Pelota amarilla con estrella roja" width="96" height="96" loading="lazy" decoding="async">
+        <h2 class="section-title">¡Ya cumplo 2!</h2>
+        <img class="story-slinky" src="assets/Slinky.png" alt="Slinky, el perro resorte" width="667" height="700" loading="lazy" decoding="async">
+        <p class="lead">
+          Hace 2 años comenzó nuestra mejor aventura. Dos años de sonrisas,
+          travesuras, descubrimientos y muchísimo amor.
+          Hoy <strong>Aldo Aldair</strong> está listo para celebrar una nueva misión:
+          <strong>¡cumplir 2!</strong>
+        </p>
+      </div>
+    </section>
+
+    <section id="countdownSection" class="section section-sky">
+      <div class="section-header reveal">
+        <p class="kicker">La cuenta regresiva</p>
+        <h2>¡La aventura está por comenzar!</h2>
+      </div>
+
+      <div class="countdown reveal" aria-label="Cuenta regresiva">
+        <div class="count-box"><strong id="days">00</strong><span>Días</span></div>
+        <div class="count-box"><strong id="hours">00</strong><span>Horas</span></div>
+        <div class="count-box"><strong id="minutes">00</strong><span>Minutos</span></div>
+        <div class="count-box"><strong id="seconds">00</strong><span>Segundos</span></div>
+      </div>
+
+      <div class="date-chip reveal">
+        <span id="eventDateText">Sábado · 12 de diciembre · 2026</span>
+        <strong id="eventTimeText">3:00 p. m.</strong>
+      </div>
+
+      <button id="calendarBtn" type="button" class="btn btn-secondary reveal">Agregar al calendario</button>
+    </section>
+
+    <section id="plan" class="section section-western">
+      <div class="section-header reveal">
+        <p class="kicker">Plan de fiesta</p>
+        <h2>Tenemos una gran aventura preparada</h2>
+      </div>
+
+      <div class="plan-grid">
+        <article class="plan-card reveal">
+          <img src="assets/sheriff.svg?v=3d-2" alt="" class="icon-real">
+          <h3>1. Llegada</h3>
+          <strong id="arrivalTime">3:00 p. m.</strong>
+          <p>Nos reunimos para comenzar la diversión.</p>
+        </article>
+        <article class="plan-card reveal">
+          <img src="assets/Ham-removebg-preview.png" alt="Ham, el cerdito de juguete" class="icon-real plan-ham" width="600" height="430" loading="lazy" decoding="async">
+          <h3>2. Comida y juegos</h3>
+          <strong id="foodTime">4:00 p. m.</strong>
+          <p>Habrá comida, juegos y música</p>
+        </article>
+        <article class="plan-card reveal">
+          <img src="assets/CARA_DE_PAPA.png" alt="Cara de Papa saludando" class="icon-real plan-potato" width="607" height="408" loading="lazy" decoding="async">
+          <h3>3. Pastel y piñata</h3>
+          <strong id="cakeTime">5:00 p. m.</strong>
+          <p>Disfrutaremos del pastel y la piñata.</p>
+        </article>
+      </div>
+    </section>
+
+    <section id="venueSection" class="section section-map">
+      <article class="location-card reveal">
+        <img src="assets/pin.svg?v=3d-2" alt="" class="map-icon">
+        <div class="location-copy">
+          <p class="kicker">Lugar de la fiesta</p>
+          <h2 id="venueName">Agrega aquí el nombre del salón</h2>
+          <p id="venueAddress">Agrega aquí la dirección completa</p>
+        </div>
+        <a id="mapsBtn" href="#" target="_blank" rel="noopener" class="btn btn-primary">Ver ubicación</a>
+      </article>
+    </section>
+
+    <section id="spaceSection" class="section section-space">
+      <div class="section-header reveal">
+        <p class="kicker light">Hasta el infinito…</p>
+        <h2 class="light">y más allá</h2>
+      </div>
+
+      <div class="space-copy reveal">
+        Una gran aventura de juguetes, botas, estrellas y sonrisas.
+      </div>
+
+      <div class="shooting-star" aria-hidden="true"></div>
+
+      <div id="rocketTrack" class="rocket-track" aria-hidden="true">
+        <div id="scrollRocket" class="scroll-rocket">
+          <img src="assets/rocket.svg?v=3d-2" alt="">
+          <div class="rocket-fire"></div>
+        </div>
+      </div>
+    </section>
+
+    <section id="gallery" class="section section-gallery">
+      <div class="section-header reveal">
+        <p class="kicker">Nuestros momentos</p>
+        <h2>Pequeñas aventuras, grandes recuerdos</h2>
+      </div>
+
+      <div class="gallery-wall">
+        <figure class="polaroid reveal tilt-left"><img src="assets/foto-1.jpg" alt="Aldo Aldair"><figcaption>Aldo</figcaption></figure>
+        <figure class="polaroid reveal tilt-right"><img src="assets/foto-2.jpg" alt="Aldo Aldair"><figcaption>Pequeño explorador</figcaption></figure>
+        <figure class="polaroid reveal tilt-left"><img src="assets/foto-3.jpg" alt="Aldo Aldair"><figcaption>Gran sonrisa</figcaption></figure>
+        <figure class="polaroid reveal tilt-right"><img src="assets/foto-4.jpg" alt="Aldo Aldair"><figcaption>Dos años de amor</figcaption></figure>
+        <figure class="polaroid reveal tilt-left wide"><img src="assets/foto-5.jpg" alt="Aldo Aldair"><figcaption>Rumbo a otra aventura</figcaption></figure>
+      </div>
+    </section>
+
+    <section id="details" class="section section-paper">
+      <div class="section-header reveal">
+        <p class="kicker">Detalles importantes</p>
+        <h2>Todo listo para la fiesta</h2>
+      </div>
+
+      <div class="detail-grid">
+        <article class="detail-card reveal">
+          <img src="assets/hat.svg?v=3d-2" alt="" class="detail-icon">
+          <h3>Código de vestimenta</h3>
+          <p id="dressCode">Ven cómodo y listo para la aventura. Estilo casual, vaquero o inspirado en juguetes.</p>
+        </article>
+
+        <article class="detail-card reveal">
+          <img src="assets/calendar.svg?v=3d-2" alt="" class="detail-icon">
+          <h3>Evento</h3>
+          <p><strong id="detailDate">Sábado 12 de diciembre de 2026</strong><br><span id="detailTime">3:00 p. m.</span></p>
+        </article>
+
+        <article class="detail-card reveal">
+          <img src="assets/gift.svg?v=3d-2" alt="" class="detail-icon">
+          <h3>Regalos</h3>
+          <p>Tu presencia es el mejor regalo, pero si deseas tener un detalle con Aldo Aldair, podrás hacerlo ese día en la fiesta.</p>
+        </article>
+      </div>
+    </section>
+
+    <section id="rsvp" class="section section-rsvp">
+      <div class="rsvp-card reveal">
+        <img src="assets/whatsapp.svg?v=3d-2" alt="" class="whatsapp-icon">
+        <div class="section-header">
+          <p class="kicker">Confirma tu asistencia</p>
+          <h2>Nos encantará verte en esta aventura</h2>
+        </div>
+
+        <form id="rsvpForm" class="rsvp-form">
+          <label>
+            Nombre
+            <input id="guestName" type="text" placeholder="Tu nombre" required>
+          </label>
+
+          <label>
+            Número de personas
+            <select id="guestCount">
+              <option value="1">1 persona</option>
+              <option value="2">2 personas</option>
+              <option value="3">3 personas</option>
+              <option value="4">4 personas</option>
+              <option value="5">5 personas</option>
+              <option value="6">6 personas</option>
+            </select>
+          </label>
+
+          <button type="submit" class="btn btn-whatsapp">Confirmar por WhatsApp</button>
+        </form>
+      </div>
+    </section>
+  </main>
+
+  <footer class="footer">
+    <div class="footer-stars">★ ★ ★</div>
+    <p>Con cariño, los padres de <strong>Aldo Aldair</strong></p>
+    <small>Te esperamos en esta aventura con alegría </small>
+  </footer>
+
+  <!-- Música opcional:
+  <audio id="bgMusic" src="assets/musica.mp3" loop preload="auto"></audio>
+  -->
+
+  <script src="script.js?v=no-welcome-rocket-5"></script>
+</body>
+</html>
