@@ -663,6 +663,7 @@ button{cursor:pointer}
   filter:drop-shadow(0 14px 10px rgba(0,0,0,.2));transition:transform .5s var(--spring);
 }
 .icon-real{width:84px;height:84px}
+.plan-rex{width:min(112px,70%);height:120px}
 .plan-ham{width:min(150px,72%);height:112px}
 .plan-potato{width:min(132px,78%);height:100px}
 .detail-icon{width:90px;height:90px}

@@ -1,12 +1,12 @@
 const CONFIG = {
-  nombre: "Aldo Aldair Bustos Muñoz",
+  nombre: "Aldo Bustos",
 
   fechaEvento: "2026-10-17T15:00:00",
   // Zona horaria del evento (CDMX, sin horario de verano desde 2022).
   // Así la cuenta regresiva y el calendario son correctos aunque el invitado esté en otro país.
   zona: "-06:00",
-  fechaTexto: "Sábado · 24 de octubre · 2026",
-  fechaDetalle: "Sábado 24 de octubre de 2026",
+  fechaTexto: "Sábado · 25 de octubre · 2026",
+  fechaDetalle: "Sábado 2 de octubre de 2026",
   horaTexto: "12:00 p. m.",
 
   itinerario: {
@@ -16,8 +16,8 @@ const CONFIG = {
   },
 
   lugar: {
-    nombre: "Parque Galindo y Villa",
-    direccion: "Av Jesus Galindo y Villa s/n, Jardín Balbuena, Venustiano Carranza, 15000 Ciudad de México, CDMX",
+    nombre: "Parque de los coyotes",
+    direccion: "Calzada De La Virgen, Rosa María Sequeira, Coapa, Ex-Ejido de San Pablo Tepetlapa, 04840 Ciudad de México, CDMX",
     maps: "https://maps.app.goo.gl/YbArgWhZQG2ytATbA"
   },
 
