@@ -374,7 +374,7 @@ async function rsvpSubmit(e){
     `${CONFIG.nombre}. Asistiremos ${count} ${count === "1" ? "persona" : "personas"}. ` +
     `🎉`;
   const url = `https://wa.me/${contact.phone}?text=${encodeURIComponent(msg)}`;
-  const whatsappWindow = window.open("about:blank", "_blank");
+  const whatsappWindow = window.open(url, "_blank");
   if(!whatsappWindow){
     showToast("Permite las ventanas emergentes para abrir WhatsApp.");
     return;
@@ -385,11 +385,9 @@ async function rsvpSubmit(e){
   buttons.forEach((button) => { button.disabled = true; });
   try{
     await saveRsvp(name, count);
-    whatsappWindow.location.replace(url);
     showToast(`Confirmación guardada. Continúa por WhatsApp con ${contact.name}.`);
   }catch(error){
-    whatsappWindow.close();
-    showToast(error.message);
+    showToast(`WhatsApp se abrió, pero no se guardó la confirmación: ${error.message}`);
   }finally{
     buttons.forEach((button) => { button.disabled = false; });
   }
