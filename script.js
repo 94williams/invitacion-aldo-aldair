@@ -84,6 +84,13 @@ function showToast(text){
   showToast.t = setTimeout(() => toast.classList.remove("show"), 2600);
 }
 
+function createWhatsAppUrl(phone, message){
+  let digits = String(phone || "").replace(/\D/g, "");
+  if(digits.length === 10) digits = `52${digits}`;
+  if(!/^52\d{10}$/.test(digits)) return "";
+  return `https://api.whatsapp.com/send?phone=${digits}&text=${encodeURIComponent(message)}`;
+}
+
 function openBurst(){
   if(reduceMotion) return;
   const burst = $("burst");
@@ -371,9 +378,13 @@ async function rsvpSubmit(e){
 
   const msg =
     `¡Hola! Soy ${name}. Confirmo nuestra asistencia a los 2 años de ` +
-    `${CONFIG.nombre}. Asistiremos ${count} ${count === "1" ? "persona" : "personas"}. ` +
+    `${CONFIG.nombre}. Asistiremos ${count} ${count === 1 ? "persona" : "personas"}. ` +
     `🎉`;
-  const url = `https://wa.me/${contact.phone}?text=${encodeURIComponent(msg)}`;
+  const url = createWhatsAppUrl(contact.phone, msg);
+  if(!url){
+    showToast(`El número configurado para ${contact.name} no es válido.`);
+    return;
+  }
   const whatsappWindow = window.open(url, "_blank");
   if(!whatsappWindow){
     showToast("Permite las ventanas emergentes para abrir WhatsApp.");
