@@ -731,9 +731,9 @@ button{cursor:pointer}
 @keyframes flame{from{scale:.9 1}to{scale:1.08 .92}}
 
 /* ---------- Galería: polaroids que se levantan del muro ---------- */
-.gallery-wall{width:min(980px,100%);display:grid;grid-template-columns:repeat(4,1fr);gap:18px;align-items:start;perspective:1200px}
+.gallery-wall{width:min(980px,100%);display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:18px;align-items:start;perspective:1200px}
 .polaroid{
-  position:relative;margin:0;padding:10px 10px 34px;background:linear-gradient(#fff,#fdfaf0);border-radius:8px;
+  position:relative;min-width:0;margin:0;padding:10px 10px 34px;background:linear-gradient(#fff,#fdfaf0);border-radius:8px;
   box-shadow:0 3px 5px rgba(20,65,106,.14),0 18px 30px rgba(20,65,106,.2);
   transition:transform .55s var(--spring),box-shadow .4s ease;
   transform-origin:50% 0;transform:rotate(var(--tilt,0deg));
@@ -746,7 +746,7 @@ button{cursor:pointer}
   transform:translateY(-14px) rotate(0) scale(1.06) rotateX(4deg);z-index:5;
   box-shadow:0 6px 10px rgba(20,65,106,.15),0 40px 50px rgba(20,65,106,.28);
 }
-.polaroid img{width:100%;aspect-ratio:4/5;object-fit:cover;border-radius:4px;box-shadow:inset 0 0 0 1px rgba(0,0,0,.05)}
+.polaroid img{width:100%;height:auto;aspect-ratio:4/5;object-fit:cover;border-radius:4px;box-shadow:inset 0 0 0 1px rgba(0,0,0,.05)}
 .polaroid figcaption{margin-top:12px;text-align:center;font-weight:800;color:var(--blue-deep)}
 .polaroid.wide{grid-column:span 2}
 .tilt-left{--tilt:-2.5deg}
@@ -796,7 +796,7 @@ button{cursor:pointer}
   .plan-grid,.detail-grid{grid-template-columns:1fr}
   .location-card{grid-template-columns:1fr;text-align:center}
   .map-icon{margin:0 auto}
-  .gallery-wall{grid-template-columns:repeat(2,1fr)}
+  .gallery-wall{grid-template-columns:repeat(2,minmax(0,1fr))}
   .polaroid.wide{grid-column:span 2}
 }
 @media(max-width:760px){
