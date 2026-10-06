@@ -1,7 +1,7 @@
 const CONFIG = {
   nombre: "Aldo Bustos",
 
-  fechaEvento: "2026-10-17T15:00:00",
+  fechaEvento: "2026-10-25T12:00:00",
   // Zona horaria del evento (CDMX, sin horario de verano desde 2022).
   // Así la cuenta regresiva y el calendario son correctos aunque el invitado esté en otro país.
   zona: "-06:00",
@@ -16,9 +16,9 @@ const CONFIG = {
   },
 
   lugar: {
-    nombre: "Parque de los coyotes",
+    nombre: "Parque de los coyotes Palapa 6",
     direccion: "Calzada De La Virgen, Rosa María Sequeira, Coapa, Ex-Ejido de San Pablo Tepetlapa, 04840 Ciudad de México, CDMX",
-    maps: "https://maps.app.goo.gl/YbArgWhZQG2ytATbA"
+    maps: "https://maps.app.goo.gl/89LAJ5LPcYw8SaTS9"
   },
 
   dressCode: "Ven cómodo y listo para la aventura. Estilo casual o inspirado en juguetes.",
@@ -176,35 +176,33 @@ function updateCountdown(){
 function downloadICS(){
   const start = eventDate();
   const end = new Date(start.getTime() + 4 * 60 * 60 * 1000);
-
-  const fmt = (d) => d.toISOString().replace(/[-:]/g, "").replace(/\.\d{3}/, "");
-  const esc = (t) => t.replace(/[\\,;]/g, (c) => "\\" + c);
+  const formatDate = (date) => date.toISOString().replace(/[-:]/g, "").replace(/\.\d{3}/, "");
+  const escapeICS = (value) => value.replace(/[\\,;]/g, (character) => `\\${character}`);
   const ics = [
     "BEGIN:VCALENDAR",
     "VERSION:2.0",
     "PRODID:-//Aldo Aldair Toy Invitation//ES",
     "BEGIN:VEVENT",
     `UID:${start.getTime()}@invitacion-aldo`,
-    `DTSTAMP:${fmt(new Date())}`,
-    `DTSTART:${fmt(start)}`,
-    `DTEND:${fmt(end)}`,
-    `SUMMARY:${esc(`2 años de ${CONFIG.nombre}`)}`,
-    `DESCRIPTION:${esc(`Fiesta de cumpleaños de ${CONFIG.nombre}`)}`,
-    `LOCATION:${esc(`${CONFIG.lugar.nombre} - ${CONFIG.lugar.direccion}`)}`,
+    `DTSTAMP:${formatDate(new Date())}`,
+    `DTSTART:${formatDate(start)}`,
+    `DTEND:${formatDate(end)}`,
+    `SUMMARY:${escapeICS(`2 años de ${CONFIG.nombre}`)}`,
+    `DESCRIPTION:${escapeICS(`Fiesta de cumpleaños de ${CONFIG.nombre}`)}`,
+    `LOCATION:${escapeICS(`${CONFIG.lugar.nombre} - ${CONFIG.lugar.direccion}`)}`,
     "END:VEVENT",
     "END:VCALENDAR"
   ].join("\r\n");
 
-  const blob = new Blob([ics], {type:"text/calendar;charset=utf-8"});
-  const url = URL.createObjectURL(blob);
-  const a = document.createElement("a");
-  a.href = url;
-  a.download = `Cumple-${CONFIG.nombre.replaceAll(" ", "-")}.ics`;
-  document.body.appendChild(a);
-  a.click();
-  a.remove();
+  const url = URL.createObjectURL(new Blob([ics], {type:"text/calendar;charset=utf-8"}));
+  const link = document.createElement("a");
+  link.href = url;
+  link.download = `Cumple-${CONFIG.nombre.replaceAll(" ", "-")}.ics`;
+  document.body.appendChild(link);
+  link.click();
+  link.remove();
   setTimeout(() => URL.revokeObjectURL(url), 1000);
-  showToast("Evento listo para agregar a tu calendario.");
+  showToast("Abre el archivo .ics con tu aplicación de calendario preferida.");
 }
 
 

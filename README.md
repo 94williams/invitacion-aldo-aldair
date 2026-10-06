@@ -23,10 +23,10 @@ Abre `script.js` y cambia únicamente el bloque `CONFIG`.
 ```js
 const CONFIG = {
   nombre: "Aldo Aldair",
-  fechaEvento: "2026-10-17T15:00:00",
-  fechaTexto: "Sábado · 17 de octubre · 2026",
-  fechaDetalle: "Sábado 12 de octubre de 2026",
-  horaTexto: "3:00 p. m.",
+  fechaEvento: "2026-10-25T12:00:00",
+  fechaTexto: "Domingo · 25 de octubre · 2026",
+  fechaDetalle: "Domingo 25 de octubre de 2026",
+  horaTexto: "12:00 p. m.",
   lugar: {
     nombre: "Nombre del salón",
     direccion: "Dirección completa",
@@ -49,6 +49,10 @@ La invitación reproduce `assets/yo-soy-tu-amigo-fiel.mp3` al pulsar «Abrir inv
 ```html
 <audio id="bgMusic" src="assets/yo-soy-tu-amigo-fiel.mp3" loop preload="none"></audio>
 ```
+
+## Calendario
+
+El botón «Descargar evento para calendario» descarga un archivo `.ics` con la fecha, hora, ubicación y duración de la fiesta. El invitado puede abrirlo con su aplicación de calendario preferida y confirmar allí que desea agregar el evento.
 
 ## Confirmaciones compartidas en Google Sheets
 
