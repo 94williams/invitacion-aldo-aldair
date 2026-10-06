@@ -1,5 +1,5 @@
 const CONFIG = {
-  nombre: "Aldo Bustos",
+  nombre: "Aldo Aldair",
 
   fechaEvento: "2026-10-25T12:00:00",
   // Zona horaria del evento (CDMX, sin horario de verano desde 2022).
@@ -158,7 +158,15 @@ function openInvitation(){
   setTimeout(() => {
     // Al quitar "locked" arranca toda la coreografía del hero (ver CSS)
     document.body.classList.remove("locked");
+    const mainContent = $("mainContent");
+    const floatingActions = document.querySelector(".floating-actions");
+    mainContent.inert = false;
+    mainContent.removeAttribute("inert");
+    floatingActions.inert = false;
+    floatingActions.removeAttribute("inert");
+    floatingActions.removeAttribute("aria-hidden");
     welcome.classList.add("hidden");
+    mainContent.focus({preventScroll: true});
     setTimeout(() => {
       welcome.remove();
       window.scrollTo({top: 0, behavior: "auto"});
@@ -435,7 +443,9 @@ function playBackgroundMusic(){
   audio.play().then(() => {
     btn.classList.add("playing");
     btn.setAttribute("aria-label", "Pausar música");
+    btn.setAttribute("aria-pressed", "true");
   }).catch(() => {
+    btn.setAttribute("aria-pressed", "false");
     showToast("No se pudo iniciar la música. Toca ♫ para volver a intentarlo.");
   });
 }
@@ -455,6 +465,7 @@ function toggleMusic(){
     audio.pause();
     btn.classList.remove("playing");
     btn.setAttribute("aria-label", "Reproducir música");
+    btn.setAttribute("aria-pressed", "false");
   }
 }
 

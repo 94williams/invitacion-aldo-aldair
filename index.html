@@ -5,6 +5,16 @@
   <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
   <meta name="theme-color" content="#66c7f0">
   <meta name="description" content="Invitación de Toy Story para los 2 años de Aldo Aldair">
+  <meta property="og:type" content="website">
+  <meta property="og:locale" content="es_MX">
+  <meta property="og:title" content="Mis 2 años · Aldo Aldair">
+  <meta property="og:description" content="¡Acompáñame a celebrar una aventura muy especial!">
+  <meta property="og:url" content="https://94williams.github.io/invitacion-aldo-aldair/">
+  <meta property="og:image" content="https://94williams.github.io/invitacion-aldo-aldair/assets/space-aldo.png">
+  <meta property="og:image:alt" content="Invitación de cumpleaños de Aldo Aldair">
+  <meta name="twitter:card" content="summary_large_image">
+  <link rel="canonical" href="https://94williams.github.io/invitacion-aldo-aldair/">
+  <link rel="icon" href="assets/marciano-head-removebg.png" type="image/png">
   <title>Mis 2 años · Aldo Aldair</title>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -68,12 +78,12 @@
     <div id="burst" class="burst" aria-hidden="true"></div>
   </section>
 
-  <div class="floating-actions">
+  <div class="floating-actions" inert aria-hidden="true">
     <button id="shareBtn" class="fab" type="button" aria-label="Compartir">↗</button>
-    <button id="musicBtn" class="fab" type="button" aria-label="Reproducir música">♫</button>
+    <button id="musicBtn" class="fab" type="button" aria-label="Reproducir música" aria-pressed="false">♫</button>
   </div>
 
-  <main>
+  <main id="mainContent" tabindex="-1" inert>
     <header class="hero">
       <div class="cloud-layer layer-1"></div>
       <div class="cloud-layer layer-2"></div>
@@ -114,7 +124,7 @@
             <span class="spacecraft-controls" aria-hidden="true"><i></i><i></i><i></i></span>
             <span class="spacecraft-badge" aria-hidden="true">A-02</span>
             <div class="hero-photo-frame">
-              <img src="assets/space-aldo.png?v=1" alt="Aldo Aldair dentro de una nave espacial">
+              <img src="assets/space-aldo.png?v=1" alt="Aldo Aldair dentro de una nave espacial" fetchpriority="high" decoding="async">
             </div>
           </div>
 
@@ -228,11 +238,11 @@
       </div>
 
       <div class="gallery-wall">
-        <figure class="polaroid reveal tilt-left"><img src="assets/Aldo-recien%20nacido.jpeg" alt="Aldo recién nacido"><figcaption>Aldo</figcaption></figure>
-        <figure class="polaroid reveal tilt-right"><img src="assets/Aldo-Risa-avi%C3%B3n.jpeg" alt="Aldo riendo junto a un avión"><figcaption>Pequeño explorador</figcaption></figure>
-        <figure class="polaroid reveal tilt-left"><img src="assets/Aldo-Gorro.jpeg" alt="Aldo con gorro"><figcaption>Gran sonrisa</figcaption></figure>
-        <figure class="polaroid reveal tilt-right"><img src="assets/Aldo.lentes.jpeg" alt="Aldo con lentes"><figcaption>Dos años de amor</figcaption></figure>
-        <figure class="polaroid reveal tilt-left wide"><img src="assets/Adldo-Recien-bañado.jpeg" alt="Aldo recién bañado"><figcaption>Rumbo a otra aventura</figcaption></figure>
+        <figure class="polaroid reveal tilt-left"><img src="assets/Aldo-recien%20nacido.jpeg" alt="Aldo recién nacido" loading="lazy" decoding="async"><figcaption>Aldo</figcaption></figure>
+        <figure class="polaroid reveal tilt-right"><img src="assets/Aldo-Risa-avi%C3%B3n.jpeg" alt="Aldo riendo junto a un avión" loading="lazy" decoding="async"><figcaption>Pequeño explorador</figcaption></figure>
+        <figure class="polaroid reveal tilt-left"><img src="assets/Aldo-Gorro.jpeg" alt="Aldo con gorro" loading="lazy" decoding="async"><figcaption>Gran sonrisa</figcaption></figure>
+        <figure class="polaroid reveal tilt-right"><img src="assets/Aldo.lentes.jpeg" alt="Aldo con lentes" loading="lazy" decoding="async"><figcaption>Dos años de amor</figcaption></figure>
+        <figure class="polaroid reveal tilt-left wide"><img src="assets/Adldo-Recien-bañado.jpeg" alt="Aldo recién bañado" loading="lazy" decoding="async"><figcaption>Rumbo a otra aventura</figcaption></figure>
       </div>
     </section>
 
@@ -274,12 +284,12 @@
         <form id="rsvpForm" class="rsvp-form">
           <label>
             Nombre
-            <input id="guestName" type="text" placeholder="Tu nombre" required>
+            <input id="guestName" name="guestName" type="text" placeholder="Tu nombre" autocomplete="name" maxlength="80" required>
           </label>
 
           <label>
             Número de personas
-            <select id="guestCount">
+            <select id="guestCount" name="guestCount">
               <option value="1">1 persona</option>
               <option value="2">2 personas</option>
               <option value="3">3 personas</option>
@@ -310,6 +320,6 @@
 
   <audio id="bgMusic" src="assets/yo-soy-tu-amigo-fiel.mp3" loop preload="none"></audio>
 
-  <script src="script.js?v=whatsapp-links-56"></script>
+  <script src="script.js?v=quality-fixes-57"></script>
 </body>
 </html>
