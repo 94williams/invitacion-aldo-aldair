@@ -1,5 +1,6 @@
 const CONFIG = {
-  nombre: "Aldo Bustos",
+  nombre: "Aldo Aldair",
+  nombreInicio: "Aldo Bustos",
 
   fechaEvento: "2026-10-25T12:00:00",
   // Zona horaria del evento (CDMX, sin horario de verano desde 2022).
@@ -34,6 +35,7 @@ const $ = (id) => document.getElementById(id);
 const reduceMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
 const finePointer = window.matchMedia("(hover: hover) and (pointer: fine)").matches;
 const eventDate = () => new Date(CONFIG.fechaEvento + CONFIG.zona);
+let countdownTimer = null;
 
 function setConfig(){
   document.title = `Mis 2 años · ${CONFIG.nombre}`;
@@ -52,8 +54,9 @@ function setConfig(){
   heroSurnames.textContent = surnames;
   heroSurnames.hidden = !surnames;
 
-  const welcomeTitle = $("welcomeTitle");
-  welcomeTitle.replaceChildren(...[parts[0], parts[1], surnames].filter(Boolean).map((name, index) => {
+  const welcomeParts = CONFIG.nombreInicio.trim().split(/\s+/);
+  const welcomeNames = [welcomeParts[0], welcomeParts[1], welcomeParts.slice(2).join(" ")].filter(Boolean);
+  $("welcomeTitle").replaceChildren(...welcomeNames.map((name, index) => {
     const span = document.createElement("span");
     span.textContent = name;
     if(index === 2) span.className = "name-surnames";
@@ -175,7 +178,8 @@ function openInvitation(){
 }
 
 function updateCountdown(){
-  const diff = Math.max(0, eventDate().getTime() - Date.now());
+  const remaining = eventDate().getTime() - Date.now();
+  const diff = Math.max(0, remaining);
 
   const d = Math.floor(diff / 86400000);
   const h = Math.floor((diff % 86400000) / 3600000);
@@ -186,6 +190,14 @@ function updateCountdown(){
   $("hours").textContent = String(h).padStart(2, "0");
   $("minutes").textContent = String(m).padStart(2, "0");
   $("seconds").textContent = String(s).padStart(2, "0");
+
+  const eventFinished = remaining <= 0;
+  $("countdown").hidden = eventFinished;
+  $("countdownStatus").hidden = !eventFinished;
+  if(eventFinished && countdownTimer){
+    clearInterval(countdownTimer);
+    countdownTimer = null;
+  }
 }
 
 function downloadICS(){
@@ -317,7 +329,7 @@ function scrollTilt(){
   setTilt(0, Math.min(window.scrollY / window.innerHeight, 1) * 8);
 }
 
-function saveRsvp(name, count){
+function saveRsvp(name, count, website){
   return new Promise((resolve, reject) => {
     const requestId = `rsvp-${Date.now()}-${Math.random().toString(36).slice(2)}`;
     const frame = document.createElement("iframe");
@@ -329,7 +341,7 @@ function saveRsvp(name, count){
     form.action = CONFIG.rsvpEndpoint;
     form.target = requestId;
 
-    const fields = { requestId, name, count: String(count) };
+    const fields = { requestId, name, count: String(count), website };
     for(const [key, value] of Object.entries(fields)){
       const input = document.createElement("input");
       input.type = "hidden";
@@ -365,6 +377,7 @@ async function rsvpSubmit(e){
   e.preventDefault();
   const name = $("guestName").value.trim();
   const count = Number($("guestCount").value);
+  const website = $("guestWebsite").value.trim();
   const contactId = e.submitter?.dataset.contact;
   const contact = CONFIG.whatsappContacts.find((item) => item.id === contactId);
 
@@ -403,7 +416,7 @@ async function rsvpSubmit(e){
   const buttons = [...$("rsvpForm").querySelectorAll("button[type='submit']")];
   buttons.forEach((button) => { button.disabled = true; });
   try{
-    await saveRsvp(name, count);
+    await saveRsvp(name, count, website);
     showToast(`Confirmación guardada. Continúa por WhatsApp con ${contact.name}.`);
   }catch(error){
     showToast(`WhatsApp se abrió, pero no se guardó la confirmación: ${error.message}`);
@@ -507,12 +520,12 @@ function onScroll(){
 
 setConfig();
 updateCountdown();
+if(eventDate().getTime() > Date.now()) countdownTimer = setInterval(updateCountdown, 1000);
 observeReveal();
 updateProgressBar();
 updateRocket();
 initTilt();
 initSticky();
-setInterval(updateCountdown, 1000);
 
 $("openBtn").addEventListener("click", openInvitation);
 $("calendarBtn").addEventListener("click", downloadICS);

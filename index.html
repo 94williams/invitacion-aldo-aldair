@@ -19,7 +19,7 @@
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Bungee:wght@400&family=Luckiest+Guy&family=Nunito:wght@400;600;700;800&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="styles.css?v=welcome-toys-click-music-53">
+  <link rel="stylesheet" href="styles.css?v=stability-54">
 </head>
 <body class="locked">
   <div id="progressBar" class="progress-bar"></div>
@@ -62,7 +62,7 @@
           <div class="welcome-name-plaque">
             <h1 id="welcomeTitle" class="name-logo">
               <span>Aldo</span>
-              <span>Aldair</span>
+              <span>Bustos</span>
             </h1>
             <p class="sub-invite">¡Te invito a celebrar conmigo!</p>
           </div>
@@ -124,7 +124,7 @@
             <span class="spacecraft-controls" aria-hidden="true"><i></i><i></i><i></i></span>
             <span class="spacecraft-badge" aria-hidden="true">A-02</span>
             <div class="hero-photo-frame">
-              <img src="assets/space-aldo.png?v=1" alt="Aldo Aldair dentro de una nave espacial" fetchpriority="high" decoding="async">
+              <img src="assets/space-aldo.webp?v=2" alt="Aldo Aldair dentro de una nave espacial" width="1122" height="1402" fetchpriority="high" decoding="async">
             </div>
           </div>
 
@@ -156,12 +156,13 @@
         <h2>¡La aventura está por comenzar!</h2>
       </div>
 
-      <div class="countdown reveal" aria-label="Cuenta regresiva">
+      <div id="countdown" class="countdown reveal" aria-label="Cuenta regresiva">
         <div class="count-box"><strong id="days">00</strong><span>Días</span></div>
         <div class="count-box"><strong id="hours">00</strong><span>Horas</span></div>
         <div class="count-box"><strong id="minutes">00</strong><span>Minutos</span></div>
         <div class="count-box"><strong id="seconds">00</strong><span>Segundos</span></div>
       </div>
+      <p id="countdownStatus" class="countdown-status" role="status" hidden>¡La aventura ya comenzó!</p>
 
       <div class="date-chip reveal">
         <span id="eventDateText">Domingo · 25 de octubre · 2026</span>
@@ -181,19 +182,19 @@
         <article class="plan-card reveal">
           <img src="assets/REX.png" alt="Rex, el dinosaurio de juguete" class="icon-real plan-rex" width="359" height="393" loading="lazy" decoding="async">
           <h3>1. Llegada</h3>
-          <strong id="arrivalTime">3:00 p. m.</strong>
+          <strong id="arrivalTime">12:00 p. m.</strong>
           <p>Nos reunimos para comenzar la diversión.</p>
         </article>
         <article class="plan-card reveal">
           <img src="assets/Ham-removebg-preview.png" alt="Ham, el cerdito de juguete" class="icon-real plan-ham" width="600" height="430" loading="lazy" decoding="async">
           <h3>2. Comida y juegos</h3>
-          <strong id="foodTime">4:00 p. m.</strong>
+          <strong id="foodTime">2:00 p. m.</strong>
           <p>Habrá comida, juegos y música</p>
         </article>
         <article class="plan-card reveal">
           <img src="assets/CARA_DE_PAPA.png" alt="Cara de Papa saludando" class="icon-real plan-potato" width="607" height="408" loading="lazy" decoding="async">
           <h3>3. Pastel y piñata</h3>
-          <strong id="cakeTime">5:00 p. m.</strong>
+          <strong id="cakeTime">4:00 p. m.</strong>
           <p>Disfrutaremos del pastel y la piñata.</p>
         </article>
       </div>
@@ -204,8 +205,8 @@
         <img src="assets/pin.svg?v=3d-2" alt="" class="map-icon">
         <div class="location-copy">
           <p class="kicker">Lugar de la fiesta</p>
-          <h2 id="venueName">Agrega aquí el nombre del salón</h2>
-          <p id="venueAddress">Agrega aquí la dirección completa</p>
+          <h2 id="venueName">Parque de los coyotes Palapa 6</h2>
+          <p id="venueAddress">Calzada De La Virgen, Rosa María Sequeira, Coapa, Ex-Ejido de San Pablo Tepetlapa, 04840 Ciudad de México, CDMX</p>
         </div>
         <a id="mapsBtn" href="#" target="_blank" rel="noopener" class="btn btn-primary">Ver ubicación</a>
       </article>
@@ -238,7 +239,7 @@
       </div>
 
       <div class="gallery-wall">
-        <figure class="polaroid reveal tilt-left"><img src="assets/Aldo-recien%20nacido.jpeg" alt="Aldo recién nacido" loading="lazy" decoding="async"><figcaption>Aldo</figcaption></figure>
+        <figure class="polaroid reveal tilt-left"><img src="assets/Aldo-recien-nacido.webp" alt="Aldo recién nacido" width="1200" height="1600" loading="lazy" decoding="async"><figcaption>Aldo</figcaption></figure>
         <figure class="polaroid reveal tilt-right"><img src="assets/Aldo-Risa-avi%C3%B3n.jpeg" alt="Aldo riendo junto a un avión" loading="lazy" decoding="async"><figcaption>Pequeño explorador</figcaption></figure>
         <figure class="polaroid reveal tilt-left"><img src="assets/Aldo-Gorro.jpeg" alt="Aldo con gorro" loading="lazy" decoding="async"><figcaption>Gran sonrisa</figcaption></figure>
         <figure class="polaroid reveal tilt-right"><img src="assets/Aldo.lentes.jpeg" alt="Aldo con lentes" loading="lazy" decoding="async"><figcaption>Dos años de amor</figcaption></figure>
@@ -256,13 +257,13 @@
         <article class="detail-card reveal">
           <img src="assets/Jessy.png" alt="Jessie, vaquera de Toy Story" class="detail-icon dress-jessie" width="494" height="505" loading="lazy" decoding="async">
           <h3>Código de vestimenta</h3>
-          <p id="dressCode">Ven cómodo y listo para la aventura. Estilo casual, vaquero o inspirado en juguetes.</p>
+          <p id="dressCode">Ven cómodo y listo para la aventura. Estilo casual o inspirado en juguetes.</p>
         </article>
 
         <article class="detail-card reveal">
           <img src="assets/Juguetes feliz.png" alt="Juguetes celebrando felices" class="detail-icon event-toys" width="579" height="680" loading="lazy" decoding="async">
           <h3>Evento</h3>
-          <p><strong id="detailDate">Sábado 12 de diciembre de 2026</strong><br><span id="detailTime">3:00 p. m.</span></p>
+          <p><strong id="detailDate">Domingo 25 de octubre de 2026</strong><br><span id="detailTime">12:00 p. m.</span></p>
         </article>
 
         <article class="detail-card reveal">
@@ -282,6 +283,11 @@
         </div>
 
         <form id="rsvpForm" class="rsvp-form">
+          <div class="form-honeypot" aria-hidden="true">
+            <label for="guestWebsite">Deja este campo vacío</label>
+            <input id="guestWebsite" name="website" type="text" tabindex="-1" autocomplete="off">
+          </div>
+
           <label>
             Nombre
             <input id="guestName" name="guestName" type="text" placeholder="Tu nombre" autocomplete="name" maxlength="80" required>
@@ -320,6 +326,6 @@
 
   <audio id="bgMusic" src="assets/yo-soy-tu-amigo-fiel.mp3" loop preload="none"></audio>
 
-  <script src="script.js?v=quality-fixes-57"></script>
+  <script src="script.js?v=stability-58"></script>
 </body>
 </html>

@@ -1,4 +1,5 @@
 function doPost(e) {
+  const parentOrigin = "https://94williams.github.io";
   const parameters = e && e.parameter ? e.parameter : {};
   const requestId = String(parameters.requestId || "");
   let result;
@@ -6,9 +7,11 @@ function doPost(e) {
   try {
     const name = String(parameters.name || "").trim().replace(/\s+/g, " ");
     const count = Number(parameters.count);
+    const website = String(parameters.website || "").trim();
 
     if (!/^[\w-]{1,100}$/.test(requestId)) throw new Error("Solicitud inválida.");
-    if (!name || name.length > 120) throw new Error("Nombre inválido.");
+    if (website) throw new Error("Solicitud inválida.");
+    if (!name || name.length > 80) throw new Error("Nombre inválido.");
     if (!Number.isInteger(count) || count < 1 || count > 6) throw new Error("Cantidad de asistentes inválida.");
 
     const spreadsheet = SpreadsheetApp.getActiveSpreadsheet();
@@ -39,8 +42,9 @@ function doPost(e) {
         : [];
       const existingIndex = existingNames.findIndex((row) => row[0].trim().replace(/\s+/g, " ").toLowerCase() === normalizedName);
       const rowNumber = existingIndex >= 0 ? existingIndex + 2 : lastRow + 1;
+      const safeName = /^[=+\-@]/.test(name) ? "'" + name : name;
 
-      confirmations.getRange(rowNumber, 1, 1, 3).setValues([[name, count, new Date()]]);
+      confirmations.getRange(rowNumber, 1, 1, 3).setValues([[safeName, count, new Date()]]);
       confirmations.getRange(rowNumber, 3).setNumberFormat("dd/mm/yyyy hh:mm");
       summary.autoResizeColumns(1, 2);
       SpreadsheetApp.flush();
@@ -54,6 +58,6 @@ function doPost(e) {
   }
 
   const safeResult = JSON.stringify(result).replace(/</g, "\\u003c");
-  return HtmlService.createHtmlOutput("<script>window.parent.postMessage(" + safeResult + ", '*');</script>")
+  return HtmlService.createHtmlOutput("<script>window.parent.postMessage(" + safeResult + ", " + JSON.stringify(parentOrigin) + ");</script>")
     .setXFrameOptionsMode(HtmlService.XFrameOptionsMode.ALLOWALL);
 }

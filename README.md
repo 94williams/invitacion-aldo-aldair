@@ -23,6 +23,7 @@ Abre `script.js` y cambia únicamente el bloque `CONFIG`.
 ```js
 const CONFIG = {
   nombre: "Aldo Aldair",
+  nombreInicio: "Aldo Bustos",
   fechaEvento: "2026-10-25T12:00:00",
   fechaTexto: "Domingo · 25 de octubre · 2026",
   fechaDetalle: "Domingo 25 de octubre de 2026",
@@ -41,6 +42,8 @@ const CONFIG = {
 ```
 
 After deploying the Apps Script below, paste its `/exec` URL into `rsvpEndpoint`.
+
+`nombreInicio` se muestra únicamente en la pantalla de apertura. `nombre` se usa en el resto de la invitación, el calendario, WhatsApp y la función de compartir.
 
 ## Música
 
@@ -63,6 +66,8 @@ El formulario ofrece dos botones de WhatsApp. Antes de abrir el chat, guarda una
 3. En Apps Script, selecciona **Implementar > Nueva implementación > Aplicación web**. Elige ejecutar como tú y permite el acceso a cualquiera para que los invitados puedan confirmar. Implementa y copia la URL de la aplicación web que termina en `/exec`.
 4. En `script.js`, pega esa URL en `CONFIG.rsvpEndpoint`. Sin una URL válida, el formulario avisa y no registra ni abre WhatsApp.
 5. Mantén la hoja privada: los invitados envían confirmaciones, pero no necesitan acceso a la hoja.
+
+Cuando actualices `GoogleAppsScript.gs`, crea una nueva versión de la implementación desde Apps Script para que los cambios del servidor queden activos.
 
 La aplicación usa los números configurados en `CONFIG.whatsappContacts` (México, prefijo `52`). Cambia ahí los contactos si fuera necesario. La URL de Apps Script es pública para recibir envíos; no compartas la URL de la hoja.
 
