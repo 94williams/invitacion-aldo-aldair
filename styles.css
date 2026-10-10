@@ -1529,6 +1529,15 @@ body{
   100%{opacity:1;transform:none;filter:blur(0)}
 }
 
+/* El letrero entra dentro del viewport y reserva espacio para el trazo 3D del nombre. */
+.hero-sign.reveal.visible{animation:heroSignSafe .78s var(--smooth) both}
+.hero-copy{overflow:visible;padding-block:6px 9px}
+.hero-logo{line-height:.95;padding-block:.06em .16em}
+@keyframes heroSignSafe{
+  from{opacity:0;transform:translateY(18px) scale(.975)}
+  to{opacity:1}
+}
+
 /* Ajustes móviles: marcianos pequeños alrededor de la nave y espacio útil. */
 @media(max-width:760px){
   .section{padding:78px 15px}
