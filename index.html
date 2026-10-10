@@ -19,7 +19,7 @@
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Bungee:wght@400&family=Luckiest+Guy&family=Nunito:wght@400;600;700;800&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="styles.css?v=gallery-size-55">
+  <link rel="stylesheet" href="styles.css?v=premium-56">
 </head>
 <body class="locked">
   <div id="progressBar" class="progress-bar"></div>
@@ -79,8 +79,21 @@
   </section>
 
   <div class="floating-actions" inert aria-hidden="true">
-    <button id="shareBtn" class="fab" type="button" aria-label="Compartir">↗</button>
-    <button id="musicBtn" class="fab" type="button" aria-label="Reproducir música" aria-pressed="false">♫</button>
+    <button id="shareBtn" class="fab" type="button" aria-label="Compartir invitación">
+      <svg class="fab-icon" viewBox="0 0 24 24" aria-hidden="true">
+        <circle cx="18" cy="5" r="2.5"></circle>
+        <circle cx="6" cy="12" r="2.5"></circle>
+        <circle cx="18" cy="19" r="2.5"></circle>
+        <path d="m8.2 10.8 7.6-4.5M8.2 13.2l7.6 4.5"></path>
+      </svg>
+    </button>
+    <button id="musicBtn" class="fab" type="button" aria-label="Reproducir música" aria-pressed="false">
+      <svg class="fab-icon" viewBox="0 0 24 24" aria-hidden="true">
+        <path d="M9 18V6.7l9-2V16"></path>
+        <ellipse cx="6" cy="18" rx="3" ry="2.3"></ellipse>
+        <ellipse cx="15" cy="16" rx="3" ry="2.3"></ellipse>
+      </svg>
+    </button>
   </div>
 
   <main id="mainContent" tabindex="-1" inert>
@@ -239,11 +252,11 @@
       </div>
 
       <div class="gallery-wall">
-        <figure class="polaroid reveal tilt-left"><img src="assets/Aldo-recien-nacido.webp" alt="Aldo recién nacido" width="1200" height="1600" loading="lazy" decoding="async"><figcaption>Aldo</figcaption></figure>
-        <figure class="polaroid reveal tilt-right"><img src="assets/Aldo-Risa-avi%C3%B3n.jpeg" alt="Aldo riendo junto a un avión" loading="lazy" decoding="async"><figcaption>Pequeño explorador</figcaption></figure>
-        <figure class="polaroid reveal tilt-left"><img src="assets/Aldo-Gorro.jpeg" alt="Aldo con gorro" loading="lazy" decoding="async"><figcaption>Gran sonrisa</figcaption></figure>
-        <figure class="polaroid reveal tilt-right"><img src="assets/Aldo.lentes.jpeg" alt="Aldo con lentes" loading="lazy" decoding="async"><figcaption>Dos años de amor</figcaption></figure>
-        <figure class="polaroid reveal tilt-left wide"><img src="assets/Adldo-Recien-bañado.jpeg" alt="Aldo recién bañado" loading="lazy" decoding="async"><figcaption>Rumbo a otra aventura</figcaption></figure>
+        <figure class="polaroid reveal tilt-left" tabindex="0" role="button" aria-label="Ampliar foto: Aldo"><img src="assets/Aldo-recien-nacido.webp" alt="Aldo recién nacido" width="1200" height="1600" loading="lazy" decoding="async"><figcaption>Aldo</figcaption></figure>
+        <figure class="polaroid reveal tilt-right" tabindex="0" role="button" aria-label="Ampliar foto: Pequeño explorador"><img src="assets/Aldo-Risa-avi%C3%B3n.jpeg" alt="Aldo riendo junto a un avión" loading="lazy" decoding="async"><figcaption>Pequeño explorador</figcaption></figure>
+        <figure class="polaroid reveal tilt-left" tabindex="0" role="button" aria-label="Ampliar foto: Gran sonrisa"><img src="assets/Aldo-Gorro.jpeg" alt="Aldo con gorro" loading="lazy" decoding="async"><figcaption>Gran sonrisa</figcaption></figure>
+        <figure class="polaroid reveal tilt-right" tabindex="0" role="button" aria-label="Ampliar foto: Dos años de amor"><img src="assets/Aldo.lentes.jpeg" alt="Aldo con lentes" loading="lazy" decoding="async"><figcaption>Dos años de amor</figcaption></figure>
+        <figure class="polaroid reveal tilt-left wide" tabindex="0" role="button" aria-label="Ampliar foto: Rumbo a otra aventura"><img src="assets/Adldo-Recien-bañado.jpeg" alt="Aldo recién bañado" loading="lazy" decoding="async"><figcaption>Rumbo a otra aventura</figcaption></figure>
       </div>
     </section>
 
@@ -314,6 +327,16 @@
     </section>
   </main>
 
+  <dialog id="galleryLightbox" class="gallery-lightbox" aria-labelledby="lightboxCaption">
+    <button id="lightboxClose" class="lightbox-close" type="button" aria-label="Cerrar imagen ampliada">
+      <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M6 6l12 12M18 6 6 18"></path></svg>
+    </button>
+    <figure class="lightbox-figure">
+      <img id="lightboxImage" alt="">
+      <figcaption id="lightboxCaption"></figcaption>
+    </figure>
+  </dialog>
+
   <footer class="footer">
     <div class="footer-stars">★ ★ ★</div>
     <p>Con cariño, los padres de <strong>Aldo Aldair</strong></p>
@@ -326,6 +349,6 @@
 
   <audio id="bgMusic" src="assets/yo-soy-tu-amigo-fiel.mp3" loop preload="none"></audio>
 
-  <script src="script.js?v=stability-58"></script>
+  <script src="script.js?v=premium-59"></script>
 </body>
 </html>

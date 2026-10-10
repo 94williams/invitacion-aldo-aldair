@@ -459,7 +459,7 @@ function playBackgroundMusic(){
     btn.setAttribute("aria-pressed", "true");
   }).catch(() => {
     btn.setAttribute("aria-pressed", "false");
-    showToast("No se pudo iniciar la música. Toca ♫ para volver a intentarlo.");
+    showToast("No se pudo iniciar la música. Toca el botón de música para volver a intentarlo.");
   });
 }
 
@@ -480,6 +480,49 @@ function toggleMusic(){
     btn.setAttribute("aria-label", "Reproducir música");
     btn.setAttribute("aria-pressed", "false");
   }
+}
+
+/* ---------- Galería ampliable ---------- */
+function initGalleryLightbox(){
+  const dialog = $("galleryLightbox");
+  const image = $("lightboxImage");
+  const caption = $("lightboxCaption");
+  const closeButton = $("lightboxClose");
+
+  if(!dialog || !image || !caption || !closeButton) return;
+
+  const closeLightbox = () => {
+    if(dialog.open) dialog.close();
+  };
+
+  const openLightbox = (card) => {
+    const source = card.querySelector("img");
+    const cardCaption = card.querySelector("figcaption");
+    if(!source) return;
+
+    image.src = source.currentSrc || source.src;
+    image.alt = source.alt;
+    caption.textContent = cardCaption?.textContent || source.alt;
+    dialog.showModal();
+  };
+
+  document.querySelectorAll(".polaroid").forEach((card) => {
+    card.addEventListener("click", () => openLightbox(card));
+    card.addEventListener("keydown", (event) => {
+      if(event.key === "Enter" || event.key === " "){
+        event.preventDefault();
+        openLightbox(card);
+      }
+    });
+  });
+
+  closeButton.addEventListener("click", closeLightbox);
+  dialog.addEventListener("click", (event) => {
+    if(event.target === dialog) closeLightbox();
+  });
+  dialog.addEventListener("close", () => {
+    image.removeAttribute("src");
+  });
 }
 
 /* ---------- Botón fijo "Confirmar asistencia" ---------- */
@@ -526,6 +569,7 @@ updateProgressBar();
 updateRocket();
 initTilt();
 initSticky();
+initGalleryLightbox();
 
 $("openBtn").addEventListener("click", openInvitation);
 $("calendarBtn").addEventListener("click", downloadICS);
