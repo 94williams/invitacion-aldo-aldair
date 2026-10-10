@@ -1533,6 +1533,7 @@ body{
 .hero-sign.reveal.visible{animation:heroSignSafe .78s var(--smooth) both}
 .hero-copy{overflow:visible;padding-block:6px 9px}
 .hero-logo{line-height:.95;padding-block:.06em .16em}
+.hero-sign .animated-letter{opacity:1;transform:none;filter:none;animation:none;will-change:auto}
 @keyframes heroSignSafe{
   from{opacity:0;transform:translateY(18px) scale(.975)}
   to{opacity:1}

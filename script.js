@@ -159,23 +159,25 @@ function openInvitation(){
   const delay = reduceMotion ? 1100 : 1500;
 
   setTimeout(() => {
-    // Al quitar "locked" arranca toda la coreografía del hero (ver CSS)
-    document.body.classList.remove("locked");
-    const mainContent = $("mainContent");
-    const floatingActions = document.querySelector(".floating-actions");
-    mainContent.inert = false;
-    mainContent.removeAttribute("inert");
-    floatingActions.inert = false;
-    floatingActions.removeAttribute("inert");
-    floatingActions.removeAttribute("aria-hidden");
+    // Primero desaparece la portada; después comienza el hero para evitar
+    // que ambos títulos se superpongan durante la transición.
     welcome.classList.add("hidden");
-    updateSticky();
-    showVisibleLetters();
-    mainContent.focus({preventScroll: true});
+
     setTimeout(() => {
+      document.body.classList.remove("locked");
+      const mainContent = $("mainContent");
+      const floatingActions = document.querySelector(".floating-actions");
+      mainContent.inert = false;
+      mainContent.removeAttribute("inert");
+      floatingActions.inert = false;
+      floatingActions.removeAttribute("inert");
+      floatingActions.removeAttribute("aria-hidden");
       welcome.remove();
       window.scrollTo({top: 0, behavior: "auto"});
-    }, 800);
+      updateSticky();
+      showVisibleLetters();
+      mainContent.focus({preventScroll: true});
+    }, reduceMotion ? 20 : 720);
   }, delay);
 }
 
