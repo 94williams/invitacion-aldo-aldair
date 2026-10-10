@@ -1512,16 +1512,37 @@ body{
 .lightbox-close svg{width:22px;height:22px;fill:none;stroke:currentColor;stroke-width:2.4;stroke-linecap:round}
 @keyframes lightboxIn{from{opacity:0;transform:translateY(24px) scale(.94)}to{opacity:1;transform:none}}
 
-/* Ajustes móviles: menos decoración lateral y más espacio útil. */
+/* Las letras entran una sola vez, con un movimiento corto y sin animación continua. */
+.animated-word{display:inline-block;font:inherit;font-weight:inherit;font-style:inherit;white-space:nowrap}
+.animated-letter{
+  display:inline-block;font:inherit;font-style:normal;color:inherit;
+  -webkit-text-stroke:inherit;text-shadow:inherit;
+  opacity:0;transform:translateY(.3em) scale(.94);filter:blur(1.5px);
+  will-change:transform,opacity;transform-origin:50% 80%;
+}
+.letters-visible .animated-letter{
+  animation:letterArrive .52s var(--smooth) forwards;
+  animation-delay:calc(var(--letter-order) * 24ms);
+}
+@keyframes letterArrive{
+  60%{opacity:1;transform:translateY(-.045em) scale(1.015);filter:blur(0)}
+  100%{opacity:1;transform:none;filter:blur(0)}
+}
+
+/* Ajustes móviles: marcianos pequeños alrededor de la nave y espacio útil. */
 @media(max-width:760px){
   .section{padding:78px 15px}
   .welcome-card{border-radius:28px}
   .hero-inner{padding-inline:12px}
   .hero-sign{border-radius:28px}
   .hero-showcase{margin-top:92px}
-  .alien-left,.alien-left-lower,.alien-right,.alien-right-lower{display:none}
-  .alien-above-left{left:22%;top:-15%}
-  .alien-above-right{right:22%;top:-20%}
+  .space-alien{display:block;width:clamp(46px,12vw,64px);opacity:.7}
+  .alien-above-left{left:20%;top:-13%}
+  .alien-above-right{right:20%;top:-17%}
+  .alien-left{left:1%;top:21%}
+  .alien-right{right:1%;top:20%}
+  .alien-left-lower{left:1%;top:61%;width:clamp(42px,11vw,58px)}
+  .alien-right-lower{right:1%;top:60%;width:clamp(42px,11vw,58px)}
   .content-card,.location-card,.rsvp-card{border-radius:26px}
   .floating-actions{right:12px}
 }
@@ -1532,10 +1553,17 @@ body{
   .hero-sign{padding:17px 10px 13px}
   .spacecraft-frame{margin-inline:auto}
   .spacecraft-badge{left:50%;right:auto;transform:translateX(-50%) translateZ(54px)}
-  .alien-above-left{left:17%;top:-14%}
-  .alien-above-right{right:17%;top:-18%}
+  .space-alien{width:clamp(42px,12vw,52px);opacity:.66}
+  .alien-above-left{left:17%;top:-12%}
+  .alien-above-right{right:17%;top:-16%}
+  .alien-left{left:0;top:23%}
+  .alien-right{right:0;top:22%}
+  .alien-left-lower{left:0;top:62%;width:42px}
+  .alien-right-lower{right:0;top:61%;width:42px}
   .btn{width:100%;padding-inline:18px}
-  .hero-inner>.btn{width:calc(100% - 74px);margin-right:auto}
+  .hero-inner>.btn{width:min(340px,calc(100% - 28px));margin-inline:auto}
+  .floating-actions{transition:opacity .25s ease,transform .32s var(--smooth)}
+  .hero-actions-hidden .floating-actions{opacity:0;transform:translateY(14px);pointer-events:none}
   .floating-actions .fab{width:50px;height:50px}
   .gallery-wall{width:calc(100% - 14px)}
   .gallery-lightbox{width:calc(100vw - 18px);border-radius:20px}
@@ -1546,4 +1574,5 @@ body{
 @media(prefers-reduced-motion:reduce){
   .gallery-lightbox[open]{animation:none}
   .fab.playing{animation:none}
+  .animated-letter{opacity:1;transform:none;filter:none;animation:none!important}
 }

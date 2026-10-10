@@ -169,6 +169,8 @@ function openInvitation(){
     floatingActions.removeAttribute("inert");
     floatingActions.removeAttribute("aria-hidden");
     welcome.classList.add("hidden");
+    updateSticky();
+    showVisibleLetters();
     mainContent.focus({preventScroll: true});
     setTimeout(() => {
       welcome.remove();
@@ -244,6 +246,72 @@ function observeReveal(){
   }, {threshold: .12});
 
   document.querySelectorAll(".reveal").forEach(el => observer.observe(el));
+}
+
+/* ---------- Letras: entrada breve y escalonada ---------- */
+let letterObserver;
+
+function showVisibleLetters(){
+  if(document.body.classList.contains("locked")) return;
+
+  document.querySelectorAll(".letter-animate:not(.letters-visible)").forEach((element) => {
+    const rect = element.getBoundingClientRect();
+    if(rect.top < window.innerHeight * .94 && rect.bottom > 0){
+      element.classList.add("letters-visible");
+      letterObserver?.unobserve(element);
+    }
+  });
+}
+
+function initLetterAnimations(){
+  const targets = document.querySelectorAll(
+    ".hero-top .hero-word, .hero-year, .hero-logo > span, .section-header h2, .section-title, .location-copy h2"
+  );
+
+  targets.forEach((element) => {
+    const text = element.textContent.trim();
+    if(!text || element.classList.contains("letter-animate")) return;
+
+    element.setAttribute("aria-label", text);
+    element.classList.add("letter-animate");
+    element.textContent = "";
+
+    let order = 0;
+    const words = text.split(/\s+/);
+    words.forEach((word, wordIndex) => {
+      const wordElement = document.createElement("b");
+      wordElement.className = "animated-word";
+      wordElement.setAttribute("aria-hidden", "true");
+
+      Array.from(word).forEach((character) => {
+        const letter = document.createElement("i");
+        letter.className = "animated-letter";
+        letter.textContent = character;
+        letter.style.setProperty("--letter-order", Math.min(order, 14));
+        wordElement.appendChild(letter);
+        order += 1;
+      });
+
+      element.appendChild(wordElement);
+      if(wordIndex < words.length - 1) element.append(" ");
+    });
+  });
+
+  if(reduceMotion){
+    targets.forEach((element) => element.classList.add("letters-visible"));
+    return;
+  }
+
+  letterObserver = new IntersectionObserver((entries) => {
+    entries.forEach((entry) => {
+      if(entry.isIntersecting && !document.body.classList.contains("locked")){
+        entry.target.classList.add("letters-visible");
+        letterObserver.unobserve(entry.target);
+      }
+    });
+  }, {threshold: .22});
+
+  targets.forEach((element) => letterObserver.observe(element));
 }
 
 function updateProgressBar(){
@@ -545,6 +613,15 @@ function updateSticky(){
   const show = pastHero && !atRsvp;
   stickyBtn.classList.toggle("show", show);
   stickyBtn.tabIndex = show ? 0 : -1;
+  const hideHeroActions = window.matchMedia("(max-width: 520px)").matches && !pastHero;
+  const floatingActions = document.querySelector(".floating-actions");
+  document.body.classList.toggle("hero-actions-hidden", hideHeroActions);
+
+  if(floatingActions && !document.body.classList.contains("locked")){
+    floatingActions.inert = hideHeroActions;
+    if(hideHeroActions) floatingActions.setAttribute("aria-hidden", "true");
+    else floatingActions.removeAttribute("aria-hidden");
+  }
 }
 
 let ticking = false;
@@ -565,6 +642,7 @@ setConfig();
 updateCountdown();
 if(eventDate().getTime() > Date.now()) countdownTimer = setInterval(updateCountdown, 1000);
 observeReveal();
+initLetterAnimations();
 updateProgressBar();
 updateRocket();
 initTilt();
